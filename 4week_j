@@ -60,3 +60,49 @@ void loop() {
 
 create deatabase dust 만든 후 
 코드 입력
+import serial
+import time
+import requests, json
+from influxdb import InfluxDBClient as influxdb
+
+port='/dev/ttyACM0'
+brate=9600
+
+cmd='temp'
+seri=serial.Serial(port,9600,timeout=5)
+print(seri)
+seri.write(cmd.encode())
+
+while (True):
+    if seri.in_waiting>0:
+        time.sleep(1)
+        content=seri.readline()
+        dust=content.decode()
+        dust=dust.strip()
+
+        data=[{
+            'measurement' : 'dust1',
+            'tags':{
+                'inhatc' : '2002',
+                },
+            'fields':{
+                'dust':float(dust),
+                }
+            }]
+        client=None
+        try:
+            client=influxdb('localhost',8086,'root','root','dust')
+        except Exception as e:
+            print("Exception " + str(e))
+        if client is not None:
+            try:
+                print('write_point')
+                client.write_points(data)
+            except Exception as e:
+                print("Exception " +str(a))
+            finally:
+                client.close()
+        print("running influxDB ON")
+
+
+
