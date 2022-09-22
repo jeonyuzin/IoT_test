@@ -1,0 +1,62 @@
+sudo systemctl unmask influxdb
+sudo systemctl enable influxdb
+sudo systemctl start influxdb //
+influxdb 리눅스 껐다켜도 실행되기
+
+미세먼지 dust
+5v로 작동
+가운데 홀 부분이 먼지를 측정하고
+수신용과 송신용 적외선 LED가있음
+먼지가 있으면 뭐가 걸림
+측정 가능한 최소 시간은 10MS
+LED키고 끄는시간이 0.32ms
+9.68ms반복
+그러나 이 시간중에도
+예열하는시간 0.28ms이 포함되어있다.
+
+핀4개 중 out은 아날로그로
+led는 껐다키니까 무조건 디지털핀으로 해야함
+-------------------------------------
+int Vo = A0;
+int V_LED = 2; //디지털핀2번
+
+float Vo_value = 0;
+float voltage = 0;
+float dustDensity = 0;
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  pinMode(V_LED, OUTPUT);
+  pinMode(Vo, INPUT);//아날로그 입력모드
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  digitalWrite(V_LED, LOW);//우리가 쓴 제조사는 하이랑 로우가 반대임 이 센서는 low가 켜짐
+  delayMicroseconds(280);//0.28ms있다가 예열시간 
+  Vo_value = analogRead(Vo);//아날로그데이터를 읽음
+  delayMicroseconds(40);
+  digitalWrite(V_LED, HIGH);//이 구간 후 led를 끄고
+  delayMicroseconds(9680);//
+
+  voltage = Vo_value * 5.0 / 1023.0;
+  dustDensity = (voltage - 0.5) / 0.005;
+
+  //Serial.print("Voltage: ");
+  //Serial.println(voltage);
+  //Serial.print("Dust Density: ");
+  Serial.println(dustDensity);
+
+  delay(1000);
+}
+
+결과 70.00
+107.00~~뜨는데 이게 아날로그로 가져온 그냥 값이고
+따로 공식이 들어가야함.
+
+아날로그 데이터 :전압을 0~1023로 표현
+전압 v:아날로그 핀 값 x5.0/1023.0 원래 전압 ★
+
+create deatabase dust 만든 후 
+코드 입력
