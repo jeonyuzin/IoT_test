@@ -1,0 +1,14 @@
+카메라 모듈 + 울트라센서 
+울트라센서 아두이노 코드 
+
+카메라 모듈
+raspistill -o test.jpg -t 10000
+사진을 test.jpg로 저장
+10초후에 찍는다 t단위는 밀리초
+
+
+git clone이용해서 레파지토리만들고
+python-telegram-bot => examples=> timerbot.py
+이용해서 텔레그램과 통신
+
+
