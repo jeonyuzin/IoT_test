@@ -1,0 +1,32 @@
+Zigbee기반 온습도 조도센서  장치
+배터리기반
+집비 컴파일 빌드해서 온습도장치에 장착하면 작동
+
+이걸 미들웨어로 작동
+
+라즈베리파이에 집비를 usb로 연결(수신모듈이 됨)
+
+이걸 무선으로 장치에서 송신
+
+TestLowOneHopSht_sc 코드
+
+
+파일 3개 만듦
+Makefile 이미있음
+헤더파일
+ILL 일루미네이션 아이엘엘
+
+먼저 채널을 Makefile에서 수정  쏠곳
+
+ /opt/tinyos-2.x/apps/BaseStation //수신모듈 수정 동일하게맞춰줘야 수신함
+이건 make telosb install.0
+난 26으로 지정
+
+python2.7 설치
+pip설치
+tos 설치(근데 이미 tos.py로 읽도록 세팅되어있음 )
+오실로스코프 코딩 후 //여긴 115200아님 
+basestate가서 실행
+실행법 python2.7 oscilloscope.py serial@/dev/ttyUSB0:115200
+
+
