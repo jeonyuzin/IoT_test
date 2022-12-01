@@ -91,7 +91,7 @@ while (True):
             }]
         client=None
         try:
-            client=influxdb('localhost',8086,'root','root','dust')
+            client=influxdb('localhost',8086,'admin','admin','dust')
         except Exception as e:
             print("Exception " + str(e))
         if client is not None:
