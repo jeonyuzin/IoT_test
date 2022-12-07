@@ -1,0 +1,42 @@
+＃＃＃＃＃＃＃교안＃＃＃＃＃＃＃
+
+4주차 
+조도센서 및 아두이노 설치 
+미세먼지 dht11
+telegram bot
+
+6주차 
+울트라(초음파)센서,카메라
+
+7주차 공공기관
+
+9주차 gizbee
+
+=======================
+＃＃＃＃＃＃＃내 github＃＃＃＃ 
+week4 미세먼지데이터를 시리얼통신으로 influxdb활용
+아두이노를 통한 미세먼지 센서활용=>시리얼통신으로 라즈베리파이로 받고 influxdb에 저장
+포인트:아두이노포트 잘 맞추기
+
+week5
+카메라 모듈
+??
+
+
+week5 울트라센서
+아두이노를 통한 센서 거리에따라 LED(8번핀)을 HIGH LOW함
+
+
+DHT11
+온습도 센서
+
+DUSTAPI 공공데이터임
+
+
+pir GPIO핀을 이용해서 influxdb활용
+스위치를 누를 경우 폴링 엣지, 스위치가 떼졌을 때 라이징 엣지가 발생한다
+GPIO.add_event_detect(4, GPIO.FALLING, callback=interrupt_fired)
+
+
+ssss.py
+간단한 온습도

@@ -1,0 +1,25 @@
+#define Trig 2
+#define Echo 3
+void setup(){
+  pinMode(Trig,OUTPUT);
+  pinMode(Echo,INPUT);
+  //pinMode(8,OUTPUT);
+  Serial.begin(9600)
+}
+
+void loop(){
+  int distance=0;
+  digitalWrite(Trig,LOW);
+  delayMicroseconds(2);
+  digitalWrite(Trig,HIGH);
+  delayMicroseconds(10);
+  digitalWrite(Trig,LOW);
+  distance=pulseIn(Echo,HIGH)/58.2; //거리 값을 cm로 환산
+  Serial.print(distance);
+  Serial.println("cm");
+  if(distance<=30){
+    digitalWrite(8,HIGH);
+  } else{
+    digitalWrite(8,LOW);
+    }
+ }
